@@ -1,0 +1,495 @@
+# Microsemi I/O Physical Design Constraints file
+
+# User I/O Constraints file 
+
+# Version: 2022.1 2022.1.0.10
+
+# Family: PolarFire , Die: MPF300TS_ES , Package: FCG1152
+
+# Date generated: Wed Jul 13 14:16:41 2022 
+
+
+# 
+# User Locked I/O Bank Settings
+# 
+
+
+# 
+# Unlocked I/O Bank Settings
+# The I/O Bank Settings can be locked by directly editing this file
+# or by making changes in the I/O Attribute Editor
+# 
+
+
+
+# 
+# User Locked I/O settings
+# 
+
+# set_io -port_name RX  \
+#     -pin_name H18     \
+#     -fixed true       \
+#     -DIRECTION INPUT
+# 
+# 
+# set_io -port_name TX   \
+#     -pin_name G17      \
+#     -fixed true        \
+#     -DIRECTION OUTPUT
+# 
+# set_io -port_name FULL  \
+#     -pin_name B26                 \
+#     -fixed true                   \
+#     -DIRECTION OUTPUT
+# 
+# 
+# set_io -port_name EMPTY  \
+#     -pin_name D25               \
+#     -fixed true                 \
+#     -DIRECTION OUTPUT
+# 
+# set_io -port_name LANE_ARST_N  \
+#     -pin_name F22                      \
+#     -fixed true                        \
+#     -DIRECTION OUTPUT
+
+set_io -port_name CLEAR  \
+    -pin_name D9         \
+    -fixed true          \
+    -RES_PULL Down       \
+    -DIRECTION INPUT
+
+
+set_io -port_name LANE_ARST_N  \
+    -pin_name V20              \
+    -fixed true                \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name START  \
+    -pin_name D18        \
+    -fixed true          \
+    -RES_PULL Up         \
+    -DIRECTION INPUT
+
+
+set_io -port_name TEST_MODE_0_IN  \
+    -pin_name E14                 \
+    -fixed true                   \
+    -RES_PULL None                \
+    -DIRECTION INPUT
+
+
+set_io -port_name TEST_MODE_OUT  \
+    -pin_name AB17               \
+    -fixed true                  \
+    -DIRECTION OUTPUT
+
+
+
+set_io -port_name TEST_MODE_0_LED  \
+    -pin_name B10                  \
+    -fixed true                    \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name TEST_MODE_1_IN  \
+    -pin_name AA17                \
+    -fixed true                   \
+    -RES_PULL None                \
+    -DIRECTION INPUT
+
+
+set_io -port_name TEST_MODE_1_LED  \
+    -pin_name Y20                  \
+    -fixed true                    \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name TEST_MODE_2_IN  \
+    -pin_name AA16                \
+    -fixed true                   \
+    -RES_PULL None                \
+    -DIRECTION INPUT
+
+
+set_io -port_name TEST_MODE_2_LED  \
+    -pin_name Y21                  \
+    -fixed true                    \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name TEST_MODE_3_IN  \
+    -pin_name Y16                 \
+    -fixed true                   \
+    -RES_PULL None                \
+    -DIRECTION INPUT
+
+
+set_io -port_name TEST_MODE_3_LED  \
+    -pin_name W21                  \
+    -fixed true                    \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name VIO_ENABLE_IN  \
+    -pin_name D7                 \
+    -fixed true                  \
+    -DIRECTION INPUT
+
+
+set_io -port_name VIO_ENABLE_LED  \
+    -pin_name B9                  \
+    -fixed true                   \
+    -DIRECTION OUTPUT
+
+set_io -port_name VIO_ENABLE  \
+    -pin_name V16             \
+    -fixed true               \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name TEST_REF_CLK  \
+    -pin_name T12               \
+    -fixed true                 \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name LED7  \
+    -pin_name V15       \
+    -fixed true         \
+    -DIRECTION OUTPUT
+
+
+#set_io -port_name VIO_ENABLE_LED      \
+#    -pin_name B9                      \
+#    -fixed true                       \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name TEST_MODE_0_LED     \
+#    -pin_name B10                     \
+#    -fixed true                       \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name TEST_MODE_1_LED     \
+#    -pin_name Y20                     \
+#    -fixed true                       \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name TEST_MODE_2_LED     \
+#    -pin_name Y21                     \
+#    -fixed true                       \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name TEST_MODE_3_LED  \
+#    -pin_name W21                     \
+#    -fixed true                       \
+#    -DIRECTION OUTPUT
+
+
+#set_io -port_name {error_count_o[5]}  \
+#    -pin_name V21                     \
+#    -fixed true                       \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[6]}  \
+#    -pin_name V14                     \
+#    -fixed true                       \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[7]}  \
+#    -pin_name V15                     \
+#    -fixed true                       \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[8]}  \
+#    -pin_name T12                     \
+#    -fixed true                       \
+#    -DIRECTION OUTPUT
+
+
+#set_io -port_name {error_count_o[9]}  \
+#    -pin_name U12                     \
+#    -fixed true                       \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[10]}  \
+#    -pin_name W13                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[11]}  \
+#    -pin_name T16                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[12]}  \
+#    -pin_name W18                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[13]}  \
+#    -pin_name R16                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[14]}  \
+#    -pin_name AA21                     \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[15]}  \
+#    -pin_name AA22                     \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[16]}  \
+#    -pin_name AB18                     \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[17]}  \
+#    -pin_name AA18                     \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[18]}  \
+#    -pin_name V17                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[19]}  \
+#    -pin_name A12                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[20]}  \
+#    -pin_name A13                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[21]}  \
+#    -pin_name B14                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[22]}  \
+#    -pin_name B13                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[23]}  \
+#    -pin_name D14                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[24]}  \
+#    -pin_name D13                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[25]}  \
+#    -pin_name B15                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[26]}  \
+#    -pin_name A15                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[27]}  \
+#    -pin_name B17                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[28]}  \
+#    -pin_name B18                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[29]}  \
+#    -pin_name B4                       \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[30]}  \
+#    -pin_name C4                       \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name {error_count_o[31]}  \
+#    -pin_name C17                      \
+#    -fixed true                        \
+#    -DIRECTION OUTPUT
+
+
+set_io -port_name error_o  \
+    -pin_name V19          \
+    -fixed true            \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name generate_err  \
+    -pin_name D8                \
+    -fixed true                 \
+    -RES_PULL Down              \
+    -DIRECTION INPUT
+
+
+set_io -port_name lock_o  \
+    -pin_name V22         \
+    -fixed true           \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name rx_val_o  \
+    -pin_name W22           \
+    -fixed true             \
+    -DIRECTION OUTPUT
+
+# 
+# Dedicated Peripheral I/O Settings
+# 
+
+
+# 
+# Unlocked I/O settings
+# The I/Os in this section are unplaced or placed but are not locked
+# the other listed attributes have been applied
+# 
+
+
+#
+#Ports using Dedicated Pins
+
+#
+
+#-------------------------------------------------------------------------------
+# Lane 1
+#-------------------------------------------------------------------------------
+
+set_io -port_name LANE0_RXD_N  \
+    -pin_name K21             \
+    -DIRECTION INPUT
+
+
+set_io -port_name LANE0_RXD_P  \
+    -pin_name K22             \
+    -DIRECTION INPUT
+
+
+set_io -port_name LANE0_TXD_N  \
+    -pin_name H21             \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name LANE0_TXD_P  \
+    -pin_name H22             \
+    -DIRECTION OUTPUT
+
+
+#-------------------------------------------------------------------------------
+# Lane 2
+#-------------------------------------------------------------------------------
+
+#set_io -port_name LANE0_RXD_N  \
+#    -pin_name M21             \
+#    -DIRECTION INPUT
+#
+#
+#set_io -port_name LANE0_RXD_P  \
+#    -pin_name M22             \
+#    -DIRECTION INPUT
+#
+#
+#set_io -port_name LANE0_TXD_N  \
+#    -pin_name P21             \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name LANE0_TXD_P  \
+#    -pin_name P22             \
+#    -DIRECTION OUTPUT
+
+
+#-------------------------------------------------------------------------------
+# Lane 3
+#-------------------------------------------------------------------------------
+
+#set_io -port_name LANE0_RXD_N  \
+#    -pin_name R21             \
+#    -DIRECTION INPUT
+#
+#
+#set_io -port_name LANE0_RXD_P  \
+#    -pin_name R22             \
+#    -DIRECTION INPUT
+#
+#
+#set_io -port_name LANE0_TXD_N  \
+#    -pin_name T21             \
+#    -DIRECTION OUTPUT
+#
+#
+#set_io -port_name LANE0_TXD_P  \
+#    -pin_name T22             \
+#    -DIRECTION OUTPUT
+
+#-------------------------------------------------------------------------------
+# Test Reference Clock (clock from Opal Kelly test board)
+#-------------------------------------------------------------------------------
+
+set_io -port_name TEST_REF_CLK_PAD_N  \
+    -pin_name N20               \
+    -DIRECTION INPUT
+
+
+set_io -port_name TEST_REF_CLK_PAD_P  \
+    -pin_name N19               \
+    -DIRECTION INPUT
+
+
+#-------------------------------------------------------------------------------
+# Reference Clock
+#-------------------------------------------------------------------------------
+
+set_io -port_name REF_CLK_PAD_N  \
+    -pin_name L20               \
+    -DIRECTION INPUT
+
+
+set_io -port_name REF_CLK_PAD_P  \
+    -pin_name L19               \
+    -DIRECTION INPUT
+
+
