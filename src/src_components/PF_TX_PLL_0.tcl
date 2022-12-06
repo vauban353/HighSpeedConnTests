@@ -1,8 +1,8 @@
 # Exporting Component Description of PF_TX_PLL_0 to TCL
-# Family: PolarFire
-# Part Number: MPF300TS-1FCG1152I
+# Family: PolarFireSoC
+# Part Number: MPFS025T-1FCVG484I
 # Create and Configure the core component PF_TX_PLL_0
-create_and_configure_core -core_vlnv Actel:SgCore:PF_TX_PLL:$PF_TX_PLLver -component_name {PF_TX_PLL_0} -params {\
+create_and_configure_core -core_vlnv {Actel:SgCore:PF_TX_PLL:2.0.300} -component_name {PF_TX_PLL_0} -params {\
 "CORE:PF_TX_PLL"  \
 "INIT:0x0"  \
 "TxPLL_AUX_LOW_SEL:true"  \
@@ -25,7 +25,7 @@ create_and_configure_core -core_vlnv Actel:SgCore:PF_TX_PLL:$PF_TX_PLLver -compo
 "TxPLL_OUT:2500.000"  \
 "TxPLL_REF:156.25"  \
 "TxPLL_RN_FILTER:false"  \
-"TxPLL_SOURCE:DEDICATED"  \
+"TxPLL_SOURCE:FABRIC"  \
 "TxPLL_SSM_DEPTH:0"  \
 "TxPLL_SSM_DIVVAL:1"  \
 "TxPLL_SSM_DOWN_SPREAD:false"  \

@@ -9,6 +9,7 @@ source ./src/src_components/INIT_MONITOR.tcl
 source ./src/src_components/PF_CLK_DIV_C0.tcl
 source ./src/src_components/PF_OSC_0.tcl
 source ./src/src_components/PF_TX_PLL_0.tcl
+source ./src/src_components/PF_CCC_C0.tcl
 source ./src/src_components/PF_XCVR_0.tcl
 source ./src/src_components/PF_XCVR_REF_CLK_0.tcl
 source ./src/src_components/Reset_sync_rx.tcl

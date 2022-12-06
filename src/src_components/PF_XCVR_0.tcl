@@ -1,14 +1,14 @@
 # Exporting Component Description of PF_XCVR_0 to TCL
-# Family: PolarFire
-# Part Number: MPF300TS-1FCG1152I
+# Family: PolarFireSoC
+# Part Number: MPFS025T-1FCVG484I
 # Create and Configure the core component PF_XCVR_0
-create_and_configure_core -core_vlnv Actel:SystemBuilder:PF_XCVR_ERM:$PF_XCVR_ERMver -component_name {PF_XCVR_0} -params {\
+create_and_configure_core -core_vlnv {Actel:SystemBuilder:PF_XCVR_ERM:3.1.200} -component_name {PF_XCVR_0} -params {\
 "EXPOSE_ALL_DEBUG_PORTS:false" \
 "EXPOSE_FWF_EN_PORTS:false" \
 "SHOW_UNIVERSAL_SOLN_PORTS:true" \
 "UI_CDR_LOCK_MODE:Lock to data" \
 "UI_CDR_REFERENCE_CLK_FREQ:156.25" \
-"UI_CDR_REFERENCE_CLK_SOURCE:Dedicated" \
+"UI_CDR_REFERENCE_CLK_SOURCE:Fabric" \
 "UI_CDR_REFERENCE_CLK_TOLERANCE:1" \
 "UI_ENABLE_32BIT_DATA_WIDTH:false" \
 "UI_ENABLE_64B66B:true" \

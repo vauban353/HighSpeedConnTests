@@ -90,7 +90,6 @@ sd_instantiate_component -sd_name ${sd_name} -component_name {PF_OSC_0} -instanc
 
 # Add PF_TX_PLL_0_0 instance
 sd_instantiate_component -sd_name ${sd_name} -component_name {PF_TX_PLL_0} -instance_name {PF_TX_PLL_0_0}
-sd_mark_pins_unused -sd_name ${sd_name} -pin_names {PF_TX_PLL_0_0:PLL_LOCK}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {PF_TX_PLL_0_0:CLK_125}
 
 
@@ -114,17 +113,20 @@ sd_instantiate_component -sd_name ${sd_name} -component_name {Reset_Block} -inst
 # Add test reference Clock
 create_and_configure_core -core_vlnv {Actel:SgCore:PF_XCVR_REF_CLK:1.0.103} -component_name {PF_XCVR_TEST_REF_CLK_C0} -params {"ENABLE_FAB_CLK_0:true" "ENABLE_FAB_CLK_1:false" "ENABLE_REF_CLK_0:true" "ENABLE_REF_CLK_1:false" "REF_CLK_MODE_0:DIFFERENTIAL" "REF_CLK_MODE_1:LVCMOS"} 
 sd_instantiate_component -sd_name {top} -component_name {PF_XCVR_TEST_REF_CLK_C0} -instance_name {} 
-#sd_connect_pin_to_port -sd_name {top} -pin_name {PF_XCVR_TEST_REF_CLK_C0_0:REF_CLK} -port_name {} 
-#sd_rename_port -sd_name {top} -current_port_name {REF_CLK} -new_port_name {TEST_REF_CLK} 
 sd_mark_pins_unused -sd_name {top} -pin_names {PF_XCVR_TEST_REF_CLK_C0_0:REF_CLK} 
 sd_connect_pins -sd_name {top} -pin_names {"PF_XCVR_TEST_REF_CLK_C0_0:REF_CLK_PAD_P" "TEST_REF_CLK_PAD_P"} 
 sd_connect_pins -sd_name {top} -pin_names {"PF_XCVR_TEST_REF_CLK_C0_0:REF_CLK_PAD_N" "TEST_REF_CLK_PAD_N"} 
-# sd_connect_pins -sd_name {top} -pin_names {"LED7" "PF_XCVR_TEST_REF_CLK_C0_0:REF_CLK"} 
 
 create_and_configure_core -core_vlnv {Actel:SgCore:PF_CLK_DIV:1.0.103} -component_name {PF_CLK_DIV_C1} -params {"DIVIDER:5" "ENABLE_BIT_SLIP:false" "ENABLE_SRESET:false"} 
 sd_instantiate_component -sd_name {top} -component_name {PF_CLK_DIV_C1} -instance_name {} 
 sd_connect_pins -sd_name {top} -pin_names {"PF_CLK_DIV_C1_0:CLK_IN" "PF_XCVR_TEST_REF_CLK_C0_0:FAB_REF_CLK"} 
 sd_connect_pins -sd_name {top} -pin_names {"LED7" "PF_CLK_DIV_C1_0:CLK_OUT" "TEST_REF_CLK"} 
+
+sd_instantiate_component -sd_name {top} -component_name {PF_CCC_C0} -instance_name {PF_CCC_C0_0} 
+sd_connect_pins -sd_name {top} -pin_names {"PF_CCC_C0_0:REF_CLK_0" "PF_XCVR_REF_CLK_0_0:REF_CLK"} 
+sd_connect_pins -sd_name {top} -pin_names {"PF_CCC_C0_0:OUT0_FABCLK_0" "PF_TX_PLL_0_0:FAB_REF_CLK" "PF_XCVR_0_0:LANE0_CDR_REF_CLK_FAB" } 
+
+sd_instantiate_macro -sd_name {top} -macro_name {AND3} -instance_name {AND3_0}
 
 # Add scalar net connections
 sd_connect_pins -sd_name ${sd_name} -pin_names {"DFN1_0:CLK" "DFN1_1:CLK" "DFN1_2:CLK" "DFN1_3:CLK" "PF_XCVR_0_0:LANE0_RX_CLK_R" "Reset_Block_0:RX_clk" "pattern_chk_0:clk_i" }
@@ -144,11 +146,13 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"LANE0_TXD_P" "PF_XCVR_0_0:LANE0
 sd_connect_pins -sd_name ${sd_name} -pin_names {"LANE_ARST_N" "pattern_chk_0:LANE_ARST_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_CLK_DIV_C0_0:CLK_IN" "PF_OSC_0_0:RCOSC_160MHZ_GL" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_CLK_DIV_C0_0:CLK_OUT" "PF_XCVR_0_0:CTRL_CLK" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_TX_PLL_0_0:REF_CLK" "PF_XCVR_0_0:LANE0_CDR_REF_CLK_0" "PF_XCVR_REF_CLK_0_0:REF_CLK" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_0_0:LANE0_RX_READY" "Reset_Block_0:RX_ready" "pattern_chk_0:RX_READY" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_0_0:LANE0_RX_VAL" "pattern_chk_0:rx_val_i" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_0_0:LANE0_TX_CLK_R" "Reset_Block_0:TX_clk" "pattern_gen_0:clk_i" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_0_0:LANE0_TX_CLK_STABLE" "Reset_Block_0:TX_clk_stable" }
+sd_connect_pins -sd_name {top} -pin_names {"AND3_0:A" "PF_CCC_C0_0:OUT0_FABCLK_0"} 
+sd_connect_pins -sd_name {top} -pin_names {"AND3_0:B" "PF_TX_PLL_0_0:PLL_LOCK"} 
+sd_connect_pins -sd_name {top} -pin_names {"AND3_0:C" "PF_XCVR_0_0:LANE0_TX_CLK_STABLE"} 
+sd_connect_pins -sd_name {top} -pin_names {"AND3_0:Y" "Reset_Block_0:TX_clk_stable"} 
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_REF_CLK_0_0:REF_CLK_PAD_N" "REF_CLK_PAD_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_REF_CLK_0_0:REF_CLK_PAD_P" "REF_CLK_PAD_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"Reset_Block_0:Pattern_chk_rst_n" "pattern_chk_0:ARST_N" "pattern_chk_0:reset_n_i" }
