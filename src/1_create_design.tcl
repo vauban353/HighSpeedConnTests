@@ -1,6 +1,7 @@
 # Import source files
 import_files -hdl_source {./src/src_hdl/pattern_chk.v}
 import_files -hdl_source {./src/src_hdl/pattern_gen.v}
+import_files -hdl_source {./src/src_hdl/startup.v}
 
 build_design_hierarchy 
 

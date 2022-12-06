@@ -53,11 +53,11 @@
 #     -fixed true                        \
 #     -DIRECTION OUTPUT
 
-set_io -port_name CLEAR  \
-    -pin_name D9         \
-    -fixed true          \
-    -RES_PULL Down       \
-    -DIRECTION INPUT
+#set_io -port_name CLEAR  \
+#    -pin_name D9         \
+#    -fixed true          \
+#    -RES_PULL Down       \
+#    -DIRECTION INPUT
 
 
 set_io -port_name LANE_ARST_N  \
@@ -66,11 +66,11 @@ set_io -port_name LANE_ARST_N  \
     -DIRECTION OUTPUT
 
 
-set_io -port_name START  \
-    -pin_name D18        \
-    -fixed true          \
-    -RES_PULL Up         \
-    -DIRECTION INPUT
+#set_io -port_name START  \
+#    -pin_name D18        \
+#    -fixed true          \
+#    -RES_PULL Up         \
+#    -DIRECTION INPUT
 
 
 set_io -port_name TEST_MODE_0_IN  \

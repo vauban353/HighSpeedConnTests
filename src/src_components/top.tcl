@@ -32,26 +32,6 @@ sd_create_scalar_port -sd_name {top} -port_name {TEST_REF_CLK_PAD_P} -port_direc
 sd_create_scalar_port -sd_name {top} -port_name {TEST_REF_CLK_PAD_N} -port_direction {IN} 
 
 
-# Add DFN1_0 instance
-sd_instantiate_macro -sd_name ${sd_name} -macro_name {DFN1} -instance_name {DFN1_0}
-
-
-
-# Add DFN1_1 instance
-sd_instantiate_macro -sd_name ${sd_name} -macro_name {DFN1} -instance_name {DFN1_1}
-
-
-
-# Add DFN1_2 instance
-sd_instantiate_macro -sd_name ${sd_name} -macro_name {DFN1} -instance_name {DFN1_2}
-
-
-
-# Add DFN1_3 instance
-sd_instantiate_macro -sd_name ${sd_name} -macro_name {DFN1} -instance_name {DFN1_3}
-
-
-
 # Add INIT_component_0 instance
 sd_instantiate_component -sd_name {top} -component_name {PFSOC_INIT_MONITOR_C0} -instance_name {}
 sd_mark_pins_unused -sd_name ${sd_name} -pin_names {PFSOC_INIT_MONITOR_C0_0:PCIE_INIT_DONE}
@@ -70,6 +50,7 @@ sd_mark_pins_unused -sd_name ${sd_name} -pin_names {PFSOC_INIT_MONITOR_C0_0:AUTO
 # Add pattern_chk_0 instance
 sd_instantiate_hdl_module -sd_name ${sd_name} -hdl_module_name {pattern_chk} -hdl_file {hdl\pattern_chk.v} -instance_name {pattern_chk_0}
 sd_connect_pins_to_constant -sd_name ${sd_name} -pin_names {pattern_chk_0:RESET_EN} -value {VCC}
+sd_connect_pins_to_constant -sd_name {top} -pin_names {pattern_chk_0:clear_i} -value {GND}
 
 
 
@@ -128,14 +109,12 @@ sd_connect_pins -sd_name {top} -pin_names {"PF_CCC_C0_0:OUT0_FABCLK_0" "PF_TX_PL
 
 sd_instantiate_macro -sd_name {top} -macro_name {AND3} -instance_name {AND3_0}
 
+sd_instantiate_hdl_module -sd_name {top} -hdl_module_name {startup} -hdl_file {hdl/startup.v} -instance_name {} 
+
 # Add scalar net connections
-sd_connect_pins -sd_name ${sd_name} -pin_names {"DFN1_0:CLK" "DFN1_1:CLK" "DFN1_2:CLK" "DFN1_3:CLK" "PF_XCVR_0_0:LANE0_RX_CLK_R" "Reset_Block_0:RX_clk" "pattern_chk_0:clk_i" }
+sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_0_0:LANE0_RX_CLK_R" "Reset_Block_0:RX_clk" "pattern_chk_0:clk_i" }
 
 
-sd_connect_pins -sd_name ${sd_name} -pin_names {"DFN1_0:D" "DFN1_3:Q" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"DFN1_0:Q" "pattern_chk_0:start_i" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"DFN1_1:Q" "DFN1_2:D" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"DFN1_2:Q" "pattern_chk_0:clear_i" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PFSOC_INIT_MONITOR_C0_0:DEVICE_INIT_DONE" "Reset_Block_0:INIT_DONE" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PFSOC_INIT_MONITOR_C0_0:FABRIC_POR_N" "Reset_Block_0:FPGA_POR_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PFSOC_INIT_MONITOR_C0_0:XCVR_INIT_DONE" "PF_XCVR_0_0:CTRL_ARST_N" "PF_XCVR_0_0:LANE0_PCS_ARST_N" "PF_XCVR_0_0:LANE0_PMA_ARST_N" }
@@ -156,7 +135,6 @@ sd_connect_pins -sd_name {top} -pin_names {"AND3_0:Y" "Reset_Block_0:TX_clk_stab
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_REF_CLK_0_0:REF_CLK_PAD_N" "REF_CLK_PAD_N" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_REF_CLK_0_0:REF_CLK_PAD_P" "REF_CLK_PAD_P" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"Reset_Block_0:Pattern_chk_rst_n" "pattern_chk_0:ARST_N" "pattern_chk_0:reset_n_i" }
-sd_connect_pins -sd_name ${sd_name} -pin_names {"Reset_Block_0:Pattern_gen_rst_n" "pattern_gen_0:reset_n_i" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"pattern_chk_0:generate_err" "pattern_gen_0:generate_err_i" }
 
 
@@ -172,6 +150,12 @@ sd_connect_pins -sd_name {top} -pin_names {"AND2_0:A" "VIO_ENABLE_IN"}
 sd_connect_pins -sd_name {top} -pin_names {"AND2_0:B" "Reset_Block_0:Pattern_gen_rst_n"} 
 
 
+sd_connect_pins -sd_name {top} -pin_names {"pattern_gen_0:reset_n_i" "startup_0:start_gen_o"} 
+sd_connect_pins -sd_name {top} -pin_names {"PF_XCVR_0_0:LANE0_TX_CLK_R" "startup_0:tx_clk_i"} 
+sd_connect_pins -sd_name {top} -pin_names {"Reset_Block_0:Pattern_gen_rst_n" "startup_0:pattern_gen_n_i"} 
+sd_connect_pins -sd_name {top} -pin_names {"Reset_Block_0:Pattern_chk_rst_n" "startup_0:pattern_chk_n_i"} 
+
+
 # Add bus net connections
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_0_0:LANE0_8B10B_RX_K" "pattern_chk_0:Rx_K_Char_i" }
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_0_0:LANE0_8B10B_TX_K" "pattern_gen_0:Tx_K_Char_o" }
@@ -184,17 +168,14 @@ sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_XCVR_0_0:LANE0_TX_DATA" "pat
 sd_connect_pins -sd_name ${sd_name} -pin_names {"PF_TX_PLL_0_0:CLKS_TO_XCVR" "PF_XCVR_0_0:CLKS_FROM_TXPLL_0" }
 
 
-sd_create_scalar_port -sd_name {top} -port_name {START} -port_direction {IN} 
-sd_create_scalar_port -sd_name {top} -port_name {CLEAR} -port_direction {IN} 
-sd_connect_pins -sd_name {top} -pin_names {"DFN1_3:D" "START" "Reset_Block_0:Start"} 
-sd_connect_pins -sd_name {top} -pin_names {"CLEAR" "DFN1_1:D"} 
 sd_connect_pin_to_port -sd_name {top} -pin_name {pattern_chk_0:error_o} -port_name {} 
 sd_connect_pin_to_port -sd_name {top} -pin_name {pattern_chk_0:rx_val_o} -port_name {} 
 sd_connect_pin_to_port -sd_name {top} -pin_name {pattern_chk_0:lock_o} -port_name {} 
-#sd_connect_pin_to_port -sd_name {top} -pin_name {pattern_chk_0:error_count_o} -port_name {} 
+sd_connect_pins_to_constant -sd_name {top} -pin_names {pattern_chk_0:start_i} -value {VCC} 
 
 sd_connect_pins_to_constant -sd_name {top} -pin_names {Reset_Block_0:BANK_x_VDDI_STATUS} -value {VCC} 
 sd_connect_pins_to_constant -sd_name {top} -pin_names {Reset_Block_0:BANK_y_VDDI_STATUS} -value {VCC} 
+sd_connect_pins_to_constant -sd_name {top} -pin_names {Reset_Block_0:Start} -value {VCC} 
 
 
 sd_connect_pin_to_port -sd_name {top} -pin_name {pattern_chk_0:generate_err} -port_name {} 
